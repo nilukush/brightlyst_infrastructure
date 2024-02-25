@@ -84,6 +84,8 @@ If manual database or table setup is required, execute the following command:
 ```sh
 mysql --host=[HOSTNAME] --port=25060 --user=[USERNAME] --password=[PASSWORD] --ssl-ca=[PATH_TO_CA_CERTIFICATE] -e "[SQL_COMMAND]"
 
+---
+
 ## Managing Infrastructure
 
 - **View Infrastructure**: Check the current state of your infrastructure using `terraform show`.
