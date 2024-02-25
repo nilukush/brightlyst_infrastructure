@@ -14,72 +14,57 @@ The Brightlyst Terraform project automates the deployment of a DigitalOcean Drop
 
 ## Installation & Setup
 
-### 1. Install Terraform
+1. **Install Terraform**: Ensure you have Terraform installed. [Download Terraform](https://www.terraform.io/downloads.html) and follow the installation instructions for your operating system.
 
-Ensure you have Terraform installed. [Download Terraform](https://www.terraform.io/downloads.html) and follow the installation instructions for your operating system.
+2. **Clone the Repository**: Clone this repository to your local machine:
 
-### 2. Clone the Repository
+    ```sh
+    git clone --recurse-submodules git@github.com:nilukush/brightlyst_infrastructure.git
+    cd brightlyst-infrastructure
+    ```
 
-Clone this repository to your local machine:
+3. **Configuration**: Configure your project by editing the `terraform.tfvars` file with your DigitalOcean personal access token, SSH key fingerprint, and other customizable variables:
 
-```sh
-git clone --recurse-submodules git@github.com:nilukush/brightlyst_infrastructure.git
-cd brightlyst-infrastructure
-```
+    ```hcl
+    do_token         = "your_digitalocean_personal_access_token"
+    region           = "nyc3"
+    image            = "ubuntu-20-04-x64"
+    size             = "s-1vcpu-1gb"
+    ssh_fingerprint  = "your_ssh_key_fingerprint"
+    ```
 
-### 3. Configuration
+    **Note**: Do not commit `terraform.tfvars` to version control to keep your secrets secure.
 
-Configure your project by editing the `terraform.tfvars` file with your DigitalOcean personal access token, SSH key fingerprint, and other customizable variables.
+4. **Initialize Terraform**: Run Terraform's `init` command to prepare your project for deployment:
 
-```hcl
-do_token         = "your_digitalocean_personal_access_token"
-region           = "nyc3"
-image            = "ubuntu-20-04-x64"
-size             = "s-1vcpu-1gb"
-ssh_fingerprint  = "your_ssh_key_fingerprint"
-```
+    ```sh
+    terraform init
+    ```
 
-**Note**: Do not commit `terraform.tfvars` to version control to keep your secrets secure.
+5. **Deploy Infrastructure**: Preview the changes Terraform will make with the `plan` command and apply the changes to provision your DigitalOcean infrastructure:
 
-### 4. Initialize Terraform
+    ```sh
+    terraform plan
+    terraform apply
+    ```
 
-Run Terraform's `init` command to prepare your project for deployment:
-
-```sh
-terraform init
-```
-
-### 5. Deploy Infrastructure
-
-Preview the changes Terraform will make with the `plan` command:
-
-```sh
-terraform plan
-```
-
-Apply the changes to provision your DigitalOcean infrastructure:
-
-```sh
-terraform apply
-```
-
-Confirm the action at the prompt, and Terraform will begin provisioning your resources.
+    Confirm the action at the prompt, and Terraform will begin provisioning your resources.
 
 ## Database Setup
 
-This project includes configuration for setting up a MySQL database and tables required for the application:
+This project includes configuration for setting up a MySQL database `brightlyst` and a table `brightlyst_linkedin` required for the application:
 
-- The database is automatically created through Terraform using the `mysql_database` resource.
-- Tables are set up using a `null_resource` with a `local-exec` provisioner that executes MySQL commands.
+- **Automated Database Creation**: The database is automatically created through Terraform using the `mysql_database` resource.
+- **Table Setup**: Tables are set up using a `null_resource` with a `local-exec` provisioner that executes MySQL commands.
 
 ### Prerequisites for Database Setup
 
-- MySQL CLI tool installed for manual database operations.
-- `doctl` installed for managing DigitalOcean resources directly if needed.
+- **MySQL CLI Tool**: Installed for manual database operations.
+- **`doctl`**: Installed for managing DigitalOcean resources directly if needed.
 
 ### Manual Steps
 
-If manual database or table setup is required, execute the following command:
+For manual database or table setup, use the following command template, replacing placeholders with your actual values:
 
 ```sh
 mysql --host=[HOSTNAME] --port=25060 --user=[USERNAME] --password=[PASSWORD] --ssl-ca=[PATH_TO_CA_CERTIFICATE] -e "[SQL_COMMAND]"
@@ -97,9 +82,7 @@ Ensure your `terraform.tfvars` and any `.tfstate` files are excluded from versio
 
 ## Support & Contributing
 
-For support, contact the project maintainers or submit an issue on the GitHub repository issue tracker.
-
-Contributions to this project are welcome! Please fork the repository and submit a pull request with your proposed changes.
+For support, contact the project maintainers or submit an issue on the GitHub repository issue tracker. Contributions to this project are welcome! Please fork the repository and submit a pull request with your proposed changes.
 
 ## License
 
