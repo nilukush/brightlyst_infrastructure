@@ -83,23 +83,24 @@ If manual database or table setup is required, execute the following command:
 
 ```sh
 mysql --host=[HOSTNAME] --port=25060 --user=[USERNAME] --password=[PASSWORD] --ssl-ca=[PATH_TO_CA_CERTIFICATE] -e "[SQL_COMMAND]"
+```
 
-# Managing Infrastructure
+## Managing Infrastructure
 
 - **View Infrastructure**: Check the current state of your infrastructure using `terraform show`.
 - **Update Infrastructure**: Modify your configuration files and run `terraform apply` to update your infrastructure.
 - **Destroy Infrastructure**: Remove all the infrastructure resources managed by Terraform with `terraform destroy`.
 
-# Security
+## Security
 
 Ensure your `terraform.tfvars` and any `.tfstate` files are excluded from version control by including them in your `.gitignore` file. Manage secrets securely and consider using a secrets manager for sensitive information.
 
-# Support & Contributing
+## Support & Contributing
 
 For support, contact the project maintainers or submit an issue on the GitHub repository issue tracker.
 
 Contributions to this project are welcome! Please fork the repository and submit a pull request with your proposed changes.
 
-# License
+## License
 
 This project is open-sourced under the MIT License. See the [LICENSE](LICENSE) file for details.
